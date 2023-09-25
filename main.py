@@ -69,7 +69,7 @@ class App(ttk.Frame):
 
         #create a check for switching between kilometers and freedom units
         self.units_var = tk.StringVar()
-        self.units_checkbutton = ttk.Checkbutton(self.check_frame, text="Kilometers", variable=self.units_var, onvalue="km", offvalue="mi")
+        self.units_checkbutton = ttk.Checkbutton(self.check_frame, text="Kilometers", variable=self.units_var, onvalue="km", offvalue="mi", command=self.update_units)
         self.units_checkbutton.grid(row=3, column=0, padx=5, pady=10, sticky="nsew")
 
         # Set default units to kilometers
@@ -77,16 +77,13 @@ class App(ttk.Frame):
 
         # Initialize boolean variable to False
         self.checkbox_ticked = True
-
-        # Attach a command to the Checkbutton to toggle the boolean variable
-        self.units_checkbutton.config(command=self.ToggleCheckbox)
         
         #TODO: set the mileage next to the mileage input
-        mileage = 20
-        units = "km"
-        self.CurrentMileageLabel = ttk.Label(self.check_frame, text=f"Current Mileage: {mileage} {units}")
+        self.mileage = 20
+
+        self.CurrentMileageLabel = ttk.Label(self.check_frame, text=f"Current Mileage: {self.mileage} {self.units_var.get()}")
         self.CurrentMileageLabel.grid(row=2, column=1, padx=5, pady=(0,10), sticky="ew")
-        
+    
         # Panedwindow
         self.paned = ttk.PanedWindow(self)
         self.paned.grid(row=1, column=0, padx=25, pady=(25, 5), sticky="nsew", rowspan=3)
@@ -176,6 +173,9 @@ class App(ttk.Frame):
         units = self.units_var.get()
         if mileage:
             print(f"Mileage: {mileage} {units}")
+        
+    def update_units(self):
+        self.CurrentMileageLabel.config(text=f"Current Mileage: {self.mileage} {self.units_var.get()}")
 
 if __name__ == "__main__":
     root = tk.Tk()
