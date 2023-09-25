@@ -1,8 +1,6 @@
 import tkinter as tk
-from tkinter import ttk
-from tkinter import filedialog
+from tkinter import ttk, filedialog
 import datetime
-import os
 
 def PrintFileContents(file_path):
     with open(file_path, 'r') as file:
@@ -42,7 +40,7 @@ class App(ttk.Frame):
 
     def setup_widgets(self):
         # Create a Frame for the Checkbuttons
-        self.check_frame = ttk.LabelFrame(self, text="Input", padding=(20, 10))
+        self.check_frame = ttk.LabelFrame(self, text="Input", padding=(20, 20))
         self.check_frame.grid(
             row=0, column=0, padx=(25, 10), pady=(20, 10), sticky="nsew"
         )
